@@ -1,3 +1,3 @@
 class Variaveis {
-  static const BACKURL = 'avaliacao2-bd290-default-rtdb:';
+  static const BACKURL = 'https://avaliacao2-bd290-default-rtdb.firebaseio.com';
 }
