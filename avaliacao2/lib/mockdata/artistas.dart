@@ -2,4 +2,4 @@ import 'package:flutter/material.dart';
 
 import '../models/artista.dart';
 
-const MONTADORAS_MOCK = const [];
+const ARTISTAS_MOCK = const [];
