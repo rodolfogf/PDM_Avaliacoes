@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
-import 'tela_montadora.dart';
-import 'tela_favoritos.dart';
-
-import '../componentes/drawer_personalisado.dart';
+import 'tela_artista.dart';
+import 'package:avaliacao2/telas/tela_musica.dart';
+import 'package:avaliacao2/componentes/drawer_personalizado.dart';
 
 class TelaTabulacao extends StatefulWidget {
   @override
@@ -13,8 +11,8 @@ class TelaTabulacao extends StatefulWidget {
 class _TelaTabulacaoState extends State<TelaTabulacao> {
   int telaSelecionada = 0;
   final List<Widget> telas = [
-    TelaMontadora(),
-    TelaFavoritos(),
+    TelaArtista(),
+    TelaMusicas(),
   ];
 
   void selecionarTela(int tela) {
@@ -29,21 +27,10 @@ class _TelaTabulacaoState extends State<TelaTabulacao> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Aplicativo Veículos"),
+          title: Text("SongList App"),
         ),
         body: telas[telaSelecionada],
         drawer: DrawerPersonalisado(),
-        bottomNavigationBar: BottomNavigationBar(
-          onTap: selecionarTela,
-          currentIndex: telaSelecionada,
-          backgroundColor: Colors.green,
-          selectedItemColor: Colors.white,
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.car_rental), label: "Montadoras"),
-            BottomNavigationBarItem(icon: Icon(Icons.star), label: "Favoritos")
-          ],
-        ),
       ),
     );
   }

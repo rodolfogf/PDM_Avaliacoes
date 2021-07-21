@@ -1,8 +1,9 @@
 class Rotas {
   static const HOME = '/';
-  static const VEICULOS = '/veiculos';
-  static const DETALHES_VEICULOS = '/detalhes_veiculos';
+  static const MUSICAS = '/musicas';
+  static const DETALHES_MUSICAS = '/detalhes_musicas';
+  static const FORM_MUSICAS = '/form_musicas';
+  static const CAD_ARTISTAS = '/artistas';
+  static const FORM_ARTISTAS = '/form_artistas';
   static const PARAMETROS = '/parametros';
-  static const CAD_MONTADORAS = '/montadoras';
-  static const FORM_MONTADORAS = '/form_montadoras';
 }

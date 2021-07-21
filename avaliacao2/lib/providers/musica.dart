@@ -1,39 +1,69 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:navegacao_roteiro/mockdata/montadoras.dart';
-import 'package:navegacao_roteiro/models/montadora.dart';
 import 'package:http/http.dart' as http;
-import 'package:navegacao_roteiro/utils/variaveis.dart';
+import 'package:p2/model/artista.dart';
+import 'package:p2/model/musica.dart';
+import 'package:p2/utils/variaveis.dart';
 
-//SEGUE O PADRÃO OBSERVER - A IDEIA É INFORMAR A TODOS INTERESSADOS QUE ACONTECEU ALGUMA MUDANÇA
-class MontadorasProvider with ChangeNotifier {
-  List<Montadora> _montadoras = [];
+//verificar porque está acusando erro nas listas
+class MusicasProvider with ChangeNotifier {
+  List<Artista> _artista = [];
+  List<Musicas> _musicas = [];
 
-//Não quero passar o controle da lista para o get
-  //portanto uso o operador ... para "separar os itens" em um novo vetor
-  List<Montadora> get getMontadoras => [..._montadoras];
+  List<Musicas> get getMusicas => [..._musicas];
 
-  void adicionarMontadora(Montadora montadora) {
-    _montadoras.add(montadora);
-    //nesse momento temos efetivamente uma mudança em nossos dados
-    //estamos adicionando um valor a montadora portanto vamo informar ao padrão
-    //que estamos realizando tal mudança
+  Future<void> postMusicas(Musicas musica) async {
+    var url = Uri.https(
+        Variaveis.BACKURL, '/artista/${musica.nomeMusica}/musica.json');
+    http
+        .post(url,
+            body: jsonEncode({
+              'nome': musica.nomeMusica,
+              'duracao': musica.duracao,
+              'estilo': musica.estilo,
+            }))
+        .then((value) {
+      adicionarMusica(musica);
+    });
+  }
+
+  void adicionarMusica(Musicas musica) {
+    _musicas.add(musica);
     notifyListeners();
   }
 
-  //PARA FAZER REQUISIÇÕSE SINCRONAS DEVEMOS RETORNAR O FUTURE
-  Future<void> buscaMontadoras() async {
-    var url = Uri.https(Variaveis.BACKURL, '/montadoras.json');
+  Future<void> deleteMusica(Musicas musica) async {
+    var url = Uri.https(Variaveis.BACKURL,
+        '/artistas/${musica.musicaArtista}/musicas/${musica.nomeMusica}.json');
+    http
+        .delete(url,
+            body: jsonEncode({
+              'nome': musica.nomeMusica,
+              'duracao': musica.duracao,
+              'estilo': musica.estilo,
+            }))
+        .then((value) {
+      notifyListeners();
+    });
+  }
+
+  Future<void> buscaMusicas() async {
+    var url = Uri.https(Variaveis.BACKURL, '/artistas.json');
     var resposta = await http.get(url);
     Map<String, dynamic> data = json.decode(resposta.body);
-    _montadoras.clear();
-    data.forEach((idMontadora, dadosMontadora) {
-      adicionarMontadora(Montadora(
-        id: idMontadora,
-        nome: dadosMontadora['nome'],
-        color: dadosMontadora['cor'],
-      ));
+    _artista.clear();
+    _musicas.clear();
+    data.forEach((idArtista, dadosArtista) {
+      Map<String, dynamic> dadosMusica = dadosArtista['musicas'];
+      dadosMusica.forEach((idMusica, musica) {
+        adicionarMusica(Musicas(
+          musicaArtista: idMusica,
+          nomeMusica: musica['nome'],
+          duracao: musica['duracao'],
+          estilo: musica['estilo'],
+        ));
+      });
     });
     notifyListeners();
   }
