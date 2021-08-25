@@ -6,7 +6,7 @@ class AuthService extends ChangeNotifier {
   User? usuario;
   bool isLoading = true;
 
-  AuthService() {
+  AuthService() {Esse 
     _authCheck();
   }
 

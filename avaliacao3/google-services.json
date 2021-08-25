@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "114716082948",
+    "firebase_url": "https://avaliacao3-9d444-default-rtdb.firebaseio.com",
+    "project_id": "avaliacao3-9d444",
+    "storage_bucket": "avaliacao3-9d444.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114716082948:android:9bcbb50b850751348cc651",
+        "android_client_info": {
+          "package_name": "Avaliacao.n3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "114716082948-mdet33e2s4ec0ftf0b6b24av1ikhmm5d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqOnKuZedzc6J4XEpUa1aunTXVHQpmI28"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "114716082948-mdet33e2s4ec0ftf0b6b24av1ikhmm5d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
